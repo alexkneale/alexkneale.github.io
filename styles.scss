@@ -1,0 +1,134 @@
+// to do mobile
+// images of languages/programmes in flexbox
+// projects with flexbox, with links to github
+// images for contact, with hyperlinks
+
+// to do desktop, useful things to potentially look out for
+// add nice image to right of header
+// projects get spread out into grid of row length 2
+// in contacts, email on left, images on right
+
+body {
+    font-family: "Poppins", sans-serif;
+
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    justify-content: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 0.5rem;
+
+    a {
+        text-decoration: none;
+    }
+}
+
+header {
+    padding: 1rem;
+
+    h1 {
+        margin: 0;
+    }
+}
+
+main {
+    padding: 1rem;
+    section {
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 60vw;
+        }
+        h2 {
+            text-align: center;
+        }
+    }
+}
+#skills {
+    padding: 2rem;
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    p {
+        margin-bottom: 2rem;
+    }
+}
+
+.skillsgrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    justify-items: center;
+    align-items: center;
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img {
+            width: 30px;
+            height: 30px;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            margin: 0;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+    }
+}
+
+#contact {
+    color: white;
+    background: black;
+    text-align: center;
+}
+
+footer {
+    background: #f4f4f4;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+@media screen and (min-width: 768px) {
+    main section img {
+        width: 40vw;
+    }
+
+    .skillsgrid {
+        display: grid;
+        grid-template-columns: repeat(9, 1fr);
+        justify-items: center;
+        align-items: center;
+
+        &__item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            img {
+                width: 30px;
+                height: 30px;
+                margin-bottom: 0.5rem;
+            }
+
+            p {
+                margin: 0;
+                font-size: 0.9rem;
+                font-weight: 500;
+            }
+        }
+    }
+}
