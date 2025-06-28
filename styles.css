@@ -6,23 +6,39 @@ body {
   justify-content: center;
 }
 
-nav ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  gap: 0.5rem;
-}
-nav ul a {
-  text-decoration: none;
-}
-
-header {
+nav {
+  background-color: black;
   padding: 1rem;
 }
-header h1 {
-  margin: 0;
+
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+nav ul a {
+  font-size: small;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: fit-content;
+  margin-top: 0.5rem;
+  padding: 1rem 0.25rem;
+  border-radius: 4px;
+}
+nav ul a:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+
+.main-header {
+  padding: 1rem;
 }
 
 main {
@@ -40,6 +56,7 @@ main section h2 {
 
 #skills {
   padding: 2rem;
+  text-align: center;
 }
 #skills h2 {
   font-size: 2rem;
@@ -72,9 +89,72 @@ main section h2 {
   font-weight: 500;
 }
 
+.projectgrid {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 2rem;
+}
+.projectgrid__item {
+  display: grid;
+  border: 2px solid black;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.projectgrid__item img {
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 5px;
+}
+.projectgrid__item h6 {
+  margin: 0.5rem 0 0.25rem;
+  font-weight: 600;
+  color: #333;
+}
+.projectgrid__item h3 {
+  margin: 0.25rem 0;
+  font-size: 1.1rem;
+  color: #111;
+}
+.projectgrid__item p {
+  margin: 0.25rem 0 1rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+.projectgrid__item .github-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #111;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  width: fit-content;
+  transition: all 0.2s ease;
+}
+.projectgrid__item .github-button svg {
+  fill: white;
+}
+.projectgrid__item .github-button:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+.projectgrid__item .github-button:hover svg {
+  fill: black;
+}
+
 #contact {
   color: white;
-  background: black;
+  background: #111;
   text-align: center;
 }
 
@@ -82,10 +162,51 @@ footer {
   background: #f4f4f4;
   text-align: center;
   padding: 1rem;
+  width: 100%;
   margin-top: 2rem;
 }
 
-@media screen and (min-width: 768px) {
+.contact-list {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-bottom: 1rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: #111;
+  color: white;
+  width: fit-content;
+  border-radius: 10%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn svg {
+  fill: white;
+}
+.btn:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+.btn:hover svg {
+  fill: black;
+}
+
+.btn__contact--1 {
+  border-radius: 50%;
+}
+
+@media screen and (min-width: 640px) {
+  nav ul a {
+    padding: 1rem 1rem;
+    font-size: medium;
+  }
   main section img {
     width: 40vw;
   }
@@ -109,5 +230,15 @@ footer {
     margin: 0;
     font-size: 0.9rem;
     font-weight: 500;
+  }
+  .projectgrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .projectgrid__item {
+    max-width: 450px;
+    margin: 0 auto;
   }
 }

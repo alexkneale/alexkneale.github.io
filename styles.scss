@@ -1,12 +1,21 @@
+// how strictly do we have to follow layout? no navigation at top for mobile?
+// contact in footer?
+
 // to do mobile
 // images of languages/programmes in flexbox
 // projects with flexbox, with links to github
 // images for contact, with hyperlinks
+// button to download cv
 
 // to do desktop, useful things to potentially look out for
 // add nice image to right of header
 // projects get spread out into grid of row length 2
 // in contacts, email on left, images on right
+
+// brainstorm ideas
+// links with animations, so scroll down to relevant section
+
+// bem
 
 body {
     font-family: "Poppins", sans-serif;
@@ -16,26 +25,42 @@ body {
     line-height: 1.6;
     justify-content: center;
 }
+nav {
+    background-color: black;
+    padding: 1rem;
+}
 
 nav ul {
     list-style: none;
-    padding: 0;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-    gap: 0.5rem;
+    justify-content: space-evenly;
+    width: 100%;
+    //background-color: #111;
+    // padding: 1rem 1rem; // increase vertical and horizontal spacing
+    top: 0;
+    left: 0;
 
     a {
+        font-size: small;
         text-decoration: none;
+        color: white;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        width: fit-content;
+        margin-top: 0.5rem;
+        padding: 1rem 0.25rem;
+        border-radius: 4px;
+        &:hover {
+            background-color: white;
+            color: black;
+            border: 2px solid black;
+        }
     }
 }
 
-header {
+.main-header {
     padding: 1rem;
-
-    h1 {
-        margin: 0;
-    }
 }
 
 main {
@@ -54,6 +79,7 @@ main {
 }
 #skills {
     padding: 2rem;
+    text-align: center;
     h2 {
         font-size: 2rem;
         margin-bottom: 0.5rem;
@@ -89,9 +115,79 @@ main {
     }
 }
 
+.projectgrid {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 2rem;
+
+    &__item {
+        display: grid;
+        border: 2px solid black;
+        padding: 2rem;
+        background-color: #fff;
+        border-radius: 10px;
+        max-width: 800px;
+        margin: 0 auto;
+
+        img {
+            width: 100%;
+            margin-top: 1rem;
+            border-radius: 5px;
+        }
+        h6 {
+            margin: 0.5rem 0 0.25rem; // ✅ Brings it closer to the next element
+            font-weight: 600;
+            color: #333;
+        }
+
+        h3 {
+            margin: 0.25rem 0;
+            font-size: 1.1rem;
+            color: #111;
+        }
+        p {
+            margin: 0.25rem 0 1rem; // ✅ Tightens space between elements
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .github-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem; // space between icon and text
+            margin-top: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: #111;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            width: fit-content;
+            transition: all 0.2s ease;
+
+            svg {
+                fill: white;
+            }
+
+            &:hover {
+                background-color: white;
+                color: black;
+                border: 2px solid black;
+
+                svg {
+                    fill: black;
+                }
+            }
+        }
+    }
+}
+
 #contact {
     color: white;
-    background: black;
+    background: #111;
     text-align: center;
 }
 
@@ -99,10 +195,56 @@ footer {
     background: #f4f4f4;
     text-align: center;
     padding: 1rem;
+    width: 100%;
     margin-top: 2rem;
 }
 
-@media screen and (min-width: 768px) {
+.contact-list {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 1rem;
+    background-color: #111;
+    color: white;
+    width: fit-content;
+
+    border-radius: 10%;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    svg {
+        fill: white;
+    }
+
+    &:hover {
+        background-color: white;
+        color: black;
+        border: 2px solid black;
+
+        svg {
+            fill: black;
+        }
+    }
+}
+
+.btn__contact--1 {
+    border-radius: 50%;
+}
+
+@media screen and (min-width: 640px) {
+    nav ul a {
+        padding: 1rem 1rem;
+        font-size: medium;
+    }
     main section img {
         width: 40vw;
     }
@@ -129,6 +271,18 @@ footer {
                 font-size: 0.9rem;
                 font-weight: 500;
             }
+        }
+    }
+
+    .projectgrid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        padding: 2rem;
+
+        &__item {
+            max-width: 450px;
+            margin: 0 auto;
         }
     }
 }
