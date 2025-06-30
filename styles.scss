@@ -1,5 +1,10 @@
+// about me desktop
+// clean up repetition with mixins
+// overflow for smaller screens
+
 // NOTE --> default is mobile version
 @use "devices";
+@use "mixins";
 
 // settings for typing animation
 // simulates blinking text cursor
@@ -55,9 +60,9 @@ body {
     // no bullet points etc
     list-style: none;
     // create flexbox across whole row
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+
+    @include mixins.flexbox(row, space-evenly, stretch);
+
     width: 100%;
 
     // padding, spacing etc
@@ -98,10 +103,8 @@ body {
 
     // flex container, row direction
     &__content {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
+        //flexbox
+        @include mixins.flexbox(row, center, center);
     }
     //profile
     &__img {
@@ -126,7 +129,12 @@ main {
 .about {
     // center section title
     &__title {
-        text-align: center;
+        &--mobile {
+            text-align: center;
+        }
+        &--desktop {
+            display: none;
+        }
     }
     // container settings
     &__content {
@@ -139,7 +147,7 @@ main {
             display: block;
             margin-left: auto;
             margin-right: auto;
-            width: 40vw;
+            width: 50vw;
         }
     }
 }
@@ -170,9 +178,7 @@ main {
 
     // flex container, with logo and name
     &__item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        @include mixins.flexbox(column, flex-start, center);
 
         img {
             width: 30px;
@@ -198,9 +204,8 @@ main {
 
     // flex container for all 4 projects, in column direction
     &__grid {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
+        @include mixins.flexbox(column, space-evenly, stretch);
+
         gap: 2rem;
     }
 
@@ -240,21 +245,12 @@ main {
     }
     // links to repo/pdf etc
     &__btn {
-        display: inline-flex;
-        align-items: center;
+        @include mixins.button-base(#111, white, 0.5rem 1rem, 4px);
+
         gap: 0.5rem; // space between icon and text
         margin-top: 0.5rem;
-        padding: 0.5rem 1rem;
         max-height: fit-content;
-        background-color: #111;
-        color: white;
-        text-decoration: none;
-        border: none;
-        border-radius: 4px;
         font-size: 0.9rem;
-        cursor: pointer;
-        width: fit-content;
-        transition: all 0.2s ease;
 
         // github svg decoration
         svg {
@@ -262,20 +258,13 @@ main {
         }
 
         // invert colors when hovering
-        &:hover {
-            background-color: white;
-            color: black;
-            border: 2px solid black;
+        @include mixins.invert-hover();
 
-            svg {
-                fill: black;
-            }
-        }
         // flex container for project with two links
         &--container {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
+            //flexbox
+            @include mixins.flexbox(row, flex-start, center);
+
             gap: 2rem;
         }
     }
@@ -287,10 +276,8 @@ main {
     padding-bottom: 2rem;
 
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    //align-items: center;
-    justify-content: space-evenly;
+
+    @include mixins.flexbox(column, space-evenly, stretch);
 
     // settings for both lists
     .experience__item {
@@ -311,25 +298,16 @@ main {
     // flex container, row direction, for links
     &__list {
         list-style: none;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        align-items: center;
+        @include mixins.flexbox(row, space-evenly, center);
+
         padding: 1rem;
     }
     //logo buttons
     &__btn {
-        display: inline-flex;
+        @include mixins.button-base(#111, white, 1rem, 15%);
+
         align-items: center;
-        padding: 1rem;
-        background-color: #111;
-        color: white;
-        width: fit-content;
 
-        border-radius: 15%;
-
-        cursor: pointer;
-        transition: all 0.2s ease;
         &--1 {
             border-radius: 50%;
         }
@@ -338,15 +316,7 @@ main {
         }
 
         // invert colours when hovering
-        &:hover {
-            background-color: white;
-            color: black;
-            border: 2px solid black;
-
-            svg {
-                fill: black;
-            }
-        }
+        @include mixins.invert-hover();
     }
 
     &__email {
@@ -357,9 +327,10 @@ main {
 @media screen and (min-width: devices.$desktop) {
     .navbar {
         // have navigation bar on right side, and name on left side, for desktop mdoe
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+
+        // flexbox
+        @include mixins.flexbox(row, space-between, center);
+
         padding: 1rem;
         background-color: white;
         width: 100%;
@@ -377,8 +348,10 @@ main {
             width: auto;
 
             ul {
+                //flexbox
+                @include mixins.flexbox();
+
                 list-style: none;
-                display: flex;
                 gap: 1rem; // space between nav items
                 padding: 0;
                 margin: 0;
@@ -416,11 +389,20 @@ main {
 
     .about {
         //
+        // center section title
+        &__title {
+            &--mobile {
+                display: none;
+            }
+            &--desktop {
+                display: inline;
+                //padding-bottom: 5rem;
+                //text-align: left;
+            }
+        }
         &__content {
             // place image on left, and text on left, for desktop mode
-            display: flex;
-
-            flex-direction: row;
+            @include mixins.flexbox(row, space-between, center);
 
             gap: 5rem; // space between image and paragraph
             margin: 0 auto;
@@ -429,6 +411,7 @@ main {
             // less wide image for desktop mode
             &--img {
                 width: 40vw;
+                max-width: 400px;
                 height: auto;
                 border-radius: 4px;
             }
@@ -436,10 +419,12 @@ main {
             // wider paragraph
 
             &--paragraph {
-                width: 60%;
-                font-size: 1rem;
+                width: 90%;
+                //font-size: clamp(1rem, 2vw + 0.05rem, 1.3rem);
+                //font-size: 1rem;
                 line-height: 1.5;
                 text-align: left;
+                padding-top: 2rem;
             }
         }
     }
@@ -453,9 +438,7 @@ main {
     }
 
     .skills__item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        @include mixins.flexbox(column, flex-start, center);
 
         img {
             width: 30px;
